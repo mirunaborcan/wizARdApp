@@ -42,13 +42,13 @@ public class UIAuthManager : MonoBehaviour
     {
         registerUI.SetActive(false);
         loginUI.SetActive(true);
-        //ClearInputs();
+        ClearInputs();
     }
     public void RegisterScreen() // Regester button
     {
         loginUI.SetActive(false);
         registerUI.SetActive(true);
-        //ClearInputs();
+        ClearInputs();
     }
 
     public void ClearInputs()

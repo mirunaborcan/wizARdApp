@@ -17,8 +17,10 @@ public class AuthManager : MonoBehaviour
     
     public TMP_Text warningRegisterText;
     public TMP_Text warningLoginText;
+    public TMP_Text inputEmailText;
 
     string playFabUserID;
+    
 
     public static UnityEvent<string, string> OnUserDataRetrived = new UnityEvent<string, string>();
 
@@ -53,12 +55,12 @@ public class AuthManager : MonoBehaviour
     }
 
     /* LOGIN FUNCTIONALITY */
-    public void LoginUserFunction(string username, string password)
+    public void LoginUserFunction(string email, string password)
     {
-        PlayFabClientAPI.LoginWithPlayFab
-            (new LoginWithPlayFabRequest()
+        PlayFabClientAPI.LoginWithEmailAddress
+            (new LoginWithEmailAddressRequest()
             {
-                Username = username,
+                Email = email,
                 Password = password
             },
             response =>
@@ -128,5 +130,29 @@ public class AuthManager : MonoBehaviour
                  Debug.Log($"Error setting data! {error.ErrorMessage}");
              }
          ) ; 
+    }
+
+    /* RESET PASSWORD FUNCTIONALITY */
+    public void ResetPasswordFunction(string mail)
+    {
+        PlayFabClientAPI.SendAccountRecoveryEmail
+            (new SendAccountRecoveryEmailRequest()
+            {
+                Email = mail,
+                TitleId = "1F01D",
+            },
+            response =>
+            {
+                Debug.Log($"Email sent with succes!");
+                warningRegisterText.text = "Recovery email sent!!";
+                
+            },
+            error =>
+            {
+                Debug.Log($"Error! {error.GenerateErrorReport()}");
+                warningRegisterText.text = "Invalid email!";
+            }
+            );
+
     }
 }

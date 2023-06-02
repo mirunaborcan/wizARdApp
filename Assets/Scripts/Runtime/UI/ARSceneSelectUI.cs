@@ -33,11 +33,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField]
         Scrollbar m_VerticalScrollBar;
 
+        /*
         [SerializeField]
         TextMeshProUGUI m_TitleLabel;
 
         [SerializeField]
         GameObject m_BackButton;
+        */
 
         void Awake()
         {
@@ -79,7 +81,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             s_SelectedMenu.SetActive(false);
             s_SelectedMenu = menu;
             s_SelectedMenu.SetActive(true);
-            m_BackButton.SetActive(s_SelectedMenu.gameObject != gameObject);
+            //m_BackButton.SetActive(s_SelectedMenu.gameObject != gameObject);
 
             s_SelectedMenuInfo.gameObjectName = menu.name;
 
@@ -88,13 +90,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void ResetTitleLabel()
         {
-            m_TitleLabel.text = k_DefaultTitleLabel;
+            //m_TitleLabel.text = k_DefaultTitleLabel;
             s_SelectedMenuInfo.menuName = null;
         }
 
         public void SetTitleLabelMenuName(string menuName)
         {
-            m_TitleLabel.text = $"Samples / {menuName}";
+            //m_TitleLabel.text = $"Samples / {menuName}";
             s_SelectedMenuInfo.menuName = menuName;
         }
 

@@ -42,4 +42,8 @@ public class UISignIn : MonoBehaviour
     {
         AuthManager.Instance.LoginUserFunction(username, password);
     }
+    public void ResetPassword()
+    {
+        AuthManager.Instance.ResetPasswordFunction(username);
+    }
 }
