@@ -4,12 +4,14 @@ using UnityEngine;
 using TMPro;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine.SceneManagement;
 
 public class UIuserProfile : MonoBehaviour
 {
     [SerializeField]
     public TMP_Text username;
-    
+    public TMP_Text resetPasswordConfirmation;
+
     private string email; 
 
     private string _playFabUsername;
@@ -41,7 +43,29 @@ public class UIuserProfile : MonoBehaviour
 
     public void ResetPassword()
     {
-        AuthManager.Instance.ResetPasswordFunction(email);
+       bool resetRquest =  AuthManager.Instance.ResetPasswordFunction(email);
+
+        if(resetRquest)
+        {
+            resetPasswordConfirmation.text = "Change password request sent!";
+            Debug.LogError("Request is: " + resetRquest);
+        }
+        else
+        {
+            resetPasswordConfirmation.text = "Email link sent!";
+            Debug.LogError("Request is: " + resetRquest);
+        }
+    }
+
+    public void ClearTexts()
+    {
+        resetPasswordConfirmation.text = "";
+    }
+
+    public void LogOut()
+    {
+        PlayFabClientAPI.ForgetAllCredentials();
+        SceneManager.LoadScene("Authentication");
     }
 
 

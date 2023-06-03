@@ -133,8 +133,9 @@ public class AuthManager : MonoBehaviour
     }
 
     /* RESET PASSWORD FUNCTIONALITY */
-    public void ResetPasswordFunction(string mail)
+    public bool ResetPasswordFunction(string mail)
     {
+        int requestSent = 0;
         PlayFabClientAPI.SendAccountRecoveryEmail
             (new SendAccountRecoveryEmailRequest()
             {
@@ -144,15 +145,18 @@ public class AuthManager : MonoBehaviour
             response =>
             {
                 Debug.Log($"Email sent with succes!");
-                warningRegisterText.text = "Recovery email sent!!";
-                
+                warningLoginText.text = "Recovery email sent!!";
+                requestSent = 1;
             },
             error =>
             {
                 Debug.Log($"Error! {error.GenerateErrorReport()}");
-                warningRegisterText.text = "Invalid email!";
+                warningLoginText.text = "Invalid email!";
+                requestSent = 0;
             }
             );
-
+        if(requestSent == 1)
+            return true;
+        return false;
     }
 }

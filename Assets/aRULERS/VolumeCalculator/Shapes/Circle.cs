@@ -32,15 +32,19 @@ public class Circle : MonoBehaviour
         if (_textsAreCreated)
             UpdateTexts();
     }
-
-
     public void Init()
     {
+        //this line sets the position of the circle object to the same position as the _centerPoint object
         this.transform.position = _centerPoint.transform.position;
         _edgesLineRenderer = GetComponent<LineRenderer>();
+
+        //these lines set the circle's center point and radius point as child objects of the circle
+        //this ensures that the center and radius points move along with the circle when it is transformed or rotated
         _centerPoint.transform.SetParent(this.transform);
         _radiusPoint.transform.SetParent(this.transform);
 
+        //this is used later in the PlaceVerticesOverMesh() method,
+        //to adjust the y - coordinate of the center and radius points slightly above the circle's surface.
         _vertexYPosition = _centerPoint.transform.position.y;
 
         _uiManager = FindObjectOfType<UIManager>();
@@ -48,7 +52,6 @@ public class Circle : MonoBehaviour
         CreateTexts();
         UpdateRadius();
     }
-
 
     public void CreateTexts()
     {
@@ -61,9 +64,9 @@ public class Circle : MonoBehaviour
         _textsAreCreated = true;
     }
 
-
     private void UpdateRadius()
     {
+        //radius is the distance between the center and the edge
         _radius = Vector3.Distance(_centerPoint.transform.position, _radiusPoint.transform.position);
     }
 
@@ -108,7 +111,7 @@ public class Circle : MonoBehaviour
         _edgesLineRenderer.positionCount = _numberOfPoints + 1; //Add one extra point for the radius line
         List<Vector3> pointsPosition = new List<Vector3> { };
 
-        for (int i = 0; i < _numberOfPoints + 1; i++) //Compute position of all circle points to draw line renderer
+        for (int i = 0; i < _numberOfPoints + 1; i++) //Compute position of all 360 circle points to draw line renderer
         {
             float x = _radius * Mathf.Sin((2 * Mathf.PI * i) / _numberOfPoints);
             float z = _radius * Mathf.Cos((2 * Mathf.PI * i) / _numberOfPoints);
@@ -164,7 +167,7 @@ public class Circle : MonoBehaviour
 
     private void UpdateRadiusText()
     {
-        _radiusText.GetComponentInChildren<Text>().text = (_radius * 100).ToString() + "cm";
+        _radiusText.GetComponentInChildren<Text>().text = (_radius * 100).ToString("#.##") + "cm";
         _radiusText.transform.position = Camera.main.WorldToScreenPoint((_radiusPoint.transform.position + _centerPoint.transform.position) / 2);
 
         Quaternion rotationToBeAligned = Quaternion.FromToRotation(_radiusText.transform.right, 
@@ -175,7 +178,7 @@ public class Circle : MonoBehaviour
 
     private void UpdateSurfaceText()
     {
-        _surfaceText.GetComponentInChildren<Text>().text = (Mathf.PI * Mathf.Pow(_radius,2)).ToString() + "m²";
+        _surfaceText.GetComponentInChildren<Text>().text = (Mathf.PI * Mathf.Pow(_radius,2)).ToString("#.##") + "m²";
         _surfaceText.transform.position = Camera.main.WorldToScreenPoint(_centerPoint.transform.position) + new Vector3(-50f, 50f, 0);
     }
 

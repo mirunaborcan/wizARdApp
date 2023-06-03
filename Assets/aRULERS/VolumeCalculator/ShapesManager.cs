@@ -26,10 +26,11 @@ public class ShapesManager : MonoBehaviour
     public GameObject _shapeVerticePrefabs; 
     public GameObject _shapesContainer; 
 
-    public Material _classicVertexMaterial; //The classic material of vertex (black one)
-    public Material _hoverVertexMaterial; //The material set to the vertex when the user hovers it (green one)
-    public Material _movingVertexMaterial; //The material set to the vertex when the user moves it (blue one)
+    public Material _classicVertexMaterial; //The classic material of vertex 
+    public Material _hoverVertexMaterial; //The material set to the vertex when the user hovers it 
+    public Material _movingVertexMaterial; //The material set to the vertex when the user moves it 
 
+    //list of placed points
     private List<GameObject> _verticesCreated = new List<GameObject>();
 
     private WANTED_SHAPE _wantedShape;
@@ -37,14 +38,16 @@ public class ShapesManager : MonoBehaviour
     private Line _currentLine;
     private Polygon _currentPolygon;
 
-
-
     //Called to instantiate a vertex, and create a shape if the number of vertices created correspond to the selected shape
     public void PlaceVertex(Vector3 hitPosition)
     {
+        //get the placed point with its hit position
         GameObject vertex = Instantiate(_shapeVerticePrefabs, hitPosition, Quaternion.Euler(90, 0, 0));
+
+        //add the point to a list
         _verticesCreated.Add(vertex);
 
+        //if there are minimum 2 points placed, we can create a shape
         if (_verticesCreated.Count > 1)
         {
             foreach (GameObject v in _verticesCreated)
@@ -56,17 +59,22 @@ public class ShapesManager : MonoBehaviour
         //Create a shape according to the wanted shape and the number of vertices created
         switch (_wantedShape)
         {
+            case WANTED_SHAPE.BOX:
+                if (_verticesCreated.Count == 2)
+                    CreateBox();
+                break;
+
+            case WANTED_SHAPE.CIRCLE:
+                if (_verticesCreated.Count == 2)
+                    CreateCircle();
+                break;
+
             case WANTED_SHAPE.LINE:
                 if (_verticesCreated.Count == 2 && !_currentLine)
                     CreateLine();
 
                 else if (_verticesCreated.Count > 2 &&  _currentLine) //If a line is currently been drawing
                     _currentLine.AddVertice(vertex);
-                break;
-
-            case WANTED_SHAPE.CIRCLE:
-                if (_verticesCreated.Count == 2)
-                    CreateCircle();
                 break;
 
             case WANTED_SHAPE.TRIANGLE:
@@ -87,10 +95,7 @@ public class ShapesManager : MonoBehaviour
                     _currentPolygon.AddVertice(vertex);
                 break;
 
-            case WANTED_SHAPE.BOX:
-                if (_verticesCreated.Count == 2)
-                    CreateBox();
-                break;
+            
             default:
                 break;
         }
@@ -116,24 +121,14 @@ public class ShapesManager : MonoBehaviour
         _currentPolygon = null;
 
     }
-
-
-
-    private void CreateLine()
-    {
-        GameObject line = Instantiate(_linePrefab, _shapesContainer.transform);
-        Line lineScript = line.GetComponent<Line>();
-        lineScript.Init(_verticesCreated);
-        _currentLine = lineScript;
-    }
-
-
-
     private void CreateCircle()
     {
+        //instantiate a new circle object and parent it to the _shapesContainer
         GameObject circle = Instantiate(_circlePrefab, _shapesContainer.transform);
         circle.transform.position = Vector3.zero; //  _verticesCreated[0].transform.position;
+        //get the Circle component 
         Circle circleScript = circle.GetComponent<Circle>();
+        //set the center point and the radius point
         circleScript._centerPoint = _verticesCreated[0];
         circleScript._radiusPoint = _verticesCreated[1];
 
@@ -141,8 +136,24 @@ public class ShapesManager : MonoBehaviour
         circleScript.Draw();
         _verticesCreated.Clear();
     }
+    private void CreateBox()
+    {   
+        //instantiate a new box object and parent it to the _shapesContainer
+        GameObject box = Instantiate(_boxPrefab, _shapesContainer.transform);
+        box.transform.position = Vector3.zero;
+        //get the box component
+        Box boxScript = box.GetComponent<Box>();
 
-
+        boxScript.Init(_verticesCreated[0], _verticesCreated[1]);
+        _verticesCreated.Clear();
+    }
+    private void CreateLine()
+    {
+        GameObject line = Instantiate(_linePrefab, _shapesContainer.transform);
+        Line lineScript = line.GetComponent<Line>();
+        lineScript.Init(_verticesCreated);
+        _currentLine = lineScript;
+    }
 
     private void CreateTriangle()
     {
@@ -154,7 +165,6 @@ public class ShapesManager : MonoBehaviour
         _verticesCreated.Clear();
     }
 
-
     private void CreateSquare()
     {
         GameObject square = Instantiate(_squarePrefab, _shapesContainer.transform);
@@ -165,8 +175,6 @@ public class ShapesManager : MonoBehaviour
         _verticesCreated.Clear();
     }
 
-
-
     private void CreatePolygon()
     {
         GameObject polygon = Instantiate(_polygonPrefab, _shapesContainer.transform);
@@ -174,19 +182,6 @@ public class ShapesManager : MonoBehaviour
         polygonScript.Init(_verticesCreated);
         _currentPolygon = polygonScript;
     }
-
-
-
-    private void CreateBox()
-    {
-        GameObject box = Instantiate(_boxPrefab, _shapesContainer.transform);
-        box.transform.position = Vector3.zero;
-        Box boxScript = box.GetComponent<Box>();
-
-        boxScript.Init(_verticesCreated[0], _verticesCreated[1]);
-        _verticesCreated.Clear();
-    }
-
 
     public void ChangeWantedShape(WANTED_SHAPE wantedShape)
     {
@@ -197,7 +192,6 @@ public class ShapesManager : MonoBehaviour
 
         _verticesCreated.Clear();
     }
-
 
     public void VertexHover(GameObject vertex, bool hover)
     {
@@ -262,7 +256,6 @@ public class ShapesManager : MonoBehaviour
         vertex.GetComponent<Renderer>().material = _classicVertexMaterial;
         vertex.GetComponent<MeshCollider>().enabled = true;
     }
-
 
     public void DeleteVertex(GameObject vertex)
     {

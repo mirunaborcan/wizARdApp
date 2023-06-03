@@ -10,44 +10,46 @@ public class SimpleRulerManager : MonoBehaviour
 {
     ARRaycastManager aRRaycastManager;
 
+    //points placed by user on the screen by tapping
     public GameObject[] tapePoints;
+    // the reticle
     public GameObject reticle;
-    public GameObject cmButton;
 
-    float distanceBetweenPoints = 0f;
-
+    //unit of measurement
+    Unit currentUnit = Unit.m;
+    
     int currentTapePoint = 0;
+    float distanceBetweenPoints = 0f;
+    //bool placementEnabled = true;
 
     public TMP_Text distanceText;
-
     public TMP_Text floatingDistanceText;
     public GameObject floatingDistanceObject;
-
     public LineRenderer line;
-    
-    bool placementEnabled = true;
-
-    Unit currentUnit = Unit.m;
 
     void Start()
     {
         //look for a ARRaycastManager component
+        //this manager is responsible for performing raycasting in AR environment
         aRRaycastManager = GetComponent<ARRaycastManager>();
     }
 
-    // Update is called once per frame
+    // update is called once per frame
     void Update()
     {
-        
         UpdateDistance();
         PlaceFloatingText();
 
-        // shoot a raycast from the center of the screen
+        /* RAYCASTING */
+        
+        // create a new empty list called hits to store the raycast hits
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
+        // shoot a raycast from the center of the screen
         aRRaycastManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 2), hits, TrackableType.PlaneWithinPolygon);
 
-        //if the raycast hits a plane, update the reticle
+       
+        //if the raycast hits a plane, update the position and rotation of the reticle,
+        //enables the reticle if necessary, and allows the user to place tape points by tapping on the detected planes
         if (hits.Count > 0)
         {
             reticle.transform.position = hits[0].pose.position;
@@ -59,29 +61,30 @@ public class SimpleRulerManager : MonoBehaviour
                 DrawLine();
             }
 
-            // enable the reticle if its disabled and the tape points aren't placed
+            // enable the reticle if its disabled and the tape points aren't placed yet
             if (!reticle.activeInHierarchy && currentTapePoint < 2)
             {
                 reticle.SetActive(true);
             }
 
-            //if the user taps, place a tape point. disable more placements until the end of the touch
+            //if the user taps, place a tape point
+            //disable more placements until the end of the touch
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                // Check if the touch is within the bounds of any button
+                // check if the touch is within the bounds of any button
                 if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
-                    // Touch is not over a button, place the point
+                    // touch is not over a button, place the point
                     if (currentTapePoint < 2)
                     {
                         PlacePoint(hits[0].pose.position, currentTapePoint);
                     }
-                    placementEnabled = false;
+                    //placementEnabled = false;
                 }
             }
             else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                placementEnabled = true;
+                //placementEnabled = true;
             }
         }
 
@@ -93,21 +96,48 @@ public class SimpleRulerManager : MonoBehaviour
 
     }
 
-    //change the position of the approperiate tape point and make it active.
+    //change the position of the approperiate tape point and make it active
     public void PlacePoint(Vector3 pointPosition, int pointIndex)
     {
         tapePoints[pointIndex].SetActive(true);
 
+        //this moves the tape point to the desired location in the scene
         tapePoints[pointIndex].transform.position = pointPosition;
 
+        //this draws a line from the first tape point to the reticle, indicating the distance being measured
         if (currentTapePoint == 1)
         {
             DrawLine();
         }
-
+        //keeps track of the number of tape points placed in the scene.
         currentTapePoint += 1;
     }
 
+    //set the positions of the line to the tape points (or reticle)
+    void DrawLine()
+    {
+        //enable line rendering
+        line.enabled = true;
+
+        //set the position of the first vertex of the line (Position 0) to the position of the first tape point (tapePoints[0].transform.position)
+        //this connects the line to the first tape point
+        line.SetPosition(0, tapePoints[0].transform.position);
+
+        //set the position of the second vertex of the line (Position 1) to the position of the reticle (reticle.transform.position)
+        //this completes the line from the first tape point to the reticle
+        if (currentTapePoint == 1)
+        {
+            line.SetPosition(1, reticle.transform.position);
+
+        }
+        //set the position of the second vertex of the line(Position 1) to the position of the second tape point(tapePoints[1].transform.position)
+        //this completes the line from the first tape point to the second tape point
+        else if (currentTapePoint == 2)
+        {
+            line.SetPosition(1, tapePoints[1].transform.position);
+
+        }
+    }
     void UpdateDistance()
     {
         if (currentTapePoint == 0)
@@ -152,23 +182,7 @@ public class SimpleRulerManager : MonoBehaviour
 
     }
 
-    //set the positions of the line to the tape points (or reticle)
-    void DrawLine()
-    {
-        line.enabled = true;
-        line.SetPosition(0, tapePoints[0].transform.position);
-        if (currentTapePoint == 1)
-        {
-            line.SetPosition(1, reticle.transform.position);
-            
-        }
-        else if (currentTapePoint == 2)
-        {
-            line.SetPosition(1, tapePoints[1].transform.position);
-
-        }
-    }
-
+    //place the distance measured above the line
     void PlaceFloatingText()
     {
         if (currentTapePoint == 0)
@@ -197,7 +211,6 @@ public class SimpleRulerManager : MonoBehaviour
     }
 
 }
-
 public enum Unit {
     m,
     cm,

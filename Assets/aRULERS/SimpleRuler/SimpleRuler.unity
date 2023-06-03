@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 40919616}
   - component: {fileID: 40919615}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,7 +1694,7 @@ GameObject:
   - component: {fileID: 1114040583}
   - component: {fileID: 1114040582}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Unit Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2430,7 +2430,7 @@ GameObject:
   - component: {fileID: 1622254636}
   - component: {fileID: 1622254635}
   m_Layer: 5
-  m_Name: FloatingText
+  m_Name: DisplayDistOnLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

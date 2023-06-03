@@ -145,7 +145,7 @@ public class Box : MonoBehaviour
         length = Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position) * 2.0f;
         height = _heightPoint.transform.position.y - _centerPoint.transform.position.y;
        
-        _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString() + " m3";
+        _volumeText.GetComponentInChildren<Text>().text = ((width * height * length)).ToString("#.###") + " m3";
         _volumeText.transform.position = Camera.main.WorldToScreenPoint(new Vector3(_centerPoint.transform.position.x, _heightPoint.transform.position.y, _centerPoint.transform.position.z)) + new Vector3(0,-100f,0);
 
     }
