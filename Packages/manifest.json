@@ -1,5 +1,14 @@
 {
+  
+  "scopedRegistries": [
+    {
+      "name": "Packages from jillejr",
+      "url": "https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity/",
+      "scopes": [ "jillejr" ]
+    }
+  ],
   "dependencies": {
+    "jillejr.newtonsoft.json-for-unity": "12.0.201",
     "com.unity.barracuda": "https://github.com/Unity-Technologies/barracuda-release.git",
     "com.unity.collab-proxy": "2.0.0",
     "com.unity.feature.ar": "1.0.0",

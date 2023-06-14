@@ -6,23 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/aRULERS/Authentication/Authentication.unity
+    path: Assets/wizARd/Authentication/Authentication.unity
     guid: 7a6ecff9b761aae4f9a1ac33bab61d8a
   - enabled: 1
-    path: Assets/aRULERS/Menu/Menu.unity
+    path: Assets/wizARd/Tool Menu/Menu.unity
     guid: 904110ab8cef14f7d96c56ca20774e5a
   - enabled: 1
-    path: Assets/aRULERS/ObjectDetector/Detect.unity
-    guid: 0ac926d5817d54df194262ddcc5326f5
-  - enabled: 1
-    path: Assets/aRULERS/ElbowRuler/ElbowRuler.unity
+    path: Assets/wizARd/ElbowRuler/ElbowRuler.unity
     guid: 9965007d543191b45b3b2277118bca70
   - enabled: 1
-    path: Assets/aRULERS/SimpleRuler/SimpleRuler.unity
+    path: Assets/wizARd/SimpleRuler/SimpleRuler.unity
     guid: 01f15b38d40833443a8ff5bb237cc8a9
   - enabled: 1
-    path: Assets/aRULERS/VolumeCalculator/GameScene.unity
-    guid: fe76d7fd2d1b7a74ab2cbf7763985a87
+    path: Assets/wizARd/VolumeCalculator/VolumeCalculator.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: dd820f36df96fbe4195d00fb662e74fe, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 1aa0af94dcfc52043ac0f8932a59f5e1, type: 2}

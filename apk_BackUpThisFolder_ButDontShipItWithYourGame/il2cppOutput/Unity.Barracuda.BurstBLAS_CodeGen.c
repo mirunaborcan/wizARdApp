@@ -32,11 +32,11 @@ static Il2CppMethodPointer s_methodPointers[5] =
 };
 static const int32_t s_InvokerIndices[5] = 
 {
-	7724,
-	7724,
+	7704,
+	7704,
 	15,
 	14,
-	7977,
+	7957,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Unity_Barracuda_BurstBLAS_CodeGenModule;
 const Il2CppCodeGenModule g_Unity_Barracuda_BurstBLAS_CodeGenModule = 
