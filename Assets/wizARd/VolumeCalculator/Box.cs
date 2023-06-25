@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class Box : MonoBehaviour
     private bool _heightVertexIsMoving;
 
     private GameObject _volumeText;
+    public TMP_Text _bottomVolumeText;
 
     private Vector3 _initialHeightVertexWorldPosition;
     private Vector3 _initialHeightVertexViewportPosition;
@@ -53,11 +55,15 @@ public class Box : MonoBehaviour
 
     private void InitVertices(GameObject centerPoint, GameObject sidePoint)
     {
+        //set points position
         _centerPoint = centerPoint;
         _widthPoint = sidePoint;
+
+        //instantiates copies of _widthPoint for length and height
         _lengthPoint = Instantiate(_widthPoint);
         _heightPoint = Instantiate(_widthPoint);
 
+        //set the type of vertex to box type
         _lengthPoint.GetComponent<VertexType>().ShapeType = VERTEX_SHAPE_TYPE.BOX;
         _heightPoint.GetComponent<VertexType>().ShapeType = VERTEX_SHAPE_TYPE.BOX;
 
@@ -66,33 +72,41 @@ public class Box : MonoBehaviour
         _heightPoint.transform.SetParent(this.transform);
         _lengthPoint.transform.SetParent(this.transform);
 
+        //set position of lenght vertex
         PlaceLengthVertex();
-        _heightPoint.transform.position = _widthPoint.transform.position + new Vector3(0, Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position), 0);
+
+        //heightPoint vertex is set to be above the _widthPoint vertex
+        //it is positioned by adding a vertical offset equal to the distance between the _centerPoint and _widthPoint
+        _heightPoint.transform.position = _widthPoint.transform.position + 
+            new Vector3(0, Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position), 0);
         _invisibleVerticesList = new List<Vector3>();
 
     }
-
 
     private void PlaceLengthVertex()
     {
         Vector3 centerPos = _centerPoint.transform.position;
         Vector3 sidePos = _widthPoint.transform.position;
 
+        //calculates the direction vector from the side point to the center point
         Vector3 widthDirection = (centerPos - sidePos).normalized;
+
+        //calculates the direction vector perpendicular to the width direction, which represents the length direction
         Vector3 lenghtDirection = (Quaternion.Euler(0, 90, 0) * widthDirection).normalized;
 
+        //calculates the distance from the center point to the side point
         float demiSideLength = Vector3.Distance(centerPos, sidePos);
 
         _lengthPoint.transform.position = centerPos + demiSideLength * lenghtDirection;
     }
 
 
-
     private void CreateInvisiblesVertices()
     {
         for (int i = 0; i < 4; i++)
             _invisibleVerticesList.Add(Vector3.zero);
-
+        
+        //positions of bottom corners
         UpdateInvisibleVerticesPosition();
     }
 
@@ -123,8 +137,6 @@ public class Box : MonoBehaviour
         return lineToCreate;
     }
 
-
-
     private void CreateTexts()
     {
         if (!_uiManager)
@@ -145,9 +157,11 @@ public class Box : MonoBehaviour
         length = Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position) * 2.0f;
         height = _heightPoint.transform.position.y - _centerPoint.transform.position.y;
        
-        _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString() + " m3";
+        _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString("#.###") + " m3";
         _volumeText.transform.position = Camera.main.WorldToScreenPoint(new Vector3(_centerPoint.transform.position.x, _heightPoint.transform.position.y, _centerPoint.transform.position.z)) + new Vector3(0,-100f,0);
-
+        
+        _bottomVolumeText.text = (width * height * length).ToString("#.###") + " m3";
+        Debug.Log($"Distance is:" + _bottomVolumeText);
     }
 
 
@@ -159,7 +173,7 @@ public class Box : MonoBehaviour
         UpdateVertexScale();
     }
 
-
+    //calculating bottom corners
     private void UpdateInvisibleVerticesPosition()
     {
         Vector3 centerPos = _centerPoint.transform.position;
@@ -179,19 +193,20 @@ public class Box : MonoBehaviour
 
     }
 
-
-
     private void DrawEdges()
     {
         _upBoxLineRenderer.positionCount = _downBoxLineRenderer.positionCount = _invisibleVerticesList.Count + 1;
 
+        //draw edges of bottom basis and top basis - horizontal edges
         for (int i = 0; i < _invisibleVerticesList.Count + 1; i++)
         {
             Vector3 verticePosition = _invisibleVerticesList[i % _invisibleVerticesList.Count];
             _downBoxLineRenderer.SetPosition(i, verticePosition);
+            
+            //for the top corners, keep position on x and z, and replace y coordinate with position of height vertex
             _upBoxLineRenderer.SetPosition(i, new Vector3(verticePosition.x, _heightPoint.transform.position.y, verticePosition.z));
         }
-
+        //draw the vertical edges 
         for(int i=0; i<4; i++)
         {
             _edgesLineRenderers[i].SetPosition(0, _downBoxLineRenderer.GetPosition(i));
@@ -278,40 +293,46 @@ public class Box : MonoBehaviour
 
 
     //One vertex can make the shape rotate, so we have to make other vertices follow the shape
-
     private void ReplaceVertexAfterOtherMoved(GameObject vertexMoved, GameObject vertexToMove)
     {
         float demiSideToMoveDistance = Vector3.Distance(vertexToMove.transform.position, _centerPoint.transform.position);
 
+        //determine the rotation direction of the movement
         int rotationFactor = (vertexMoved == _widthPoint) ? 1 : -1;
 
         Vector3 sideMovedDirection = (_centerPoint.transform.position - vertexMoved.transform.position).normalized;
+        //find the direction in which the vertexToMove will be moved
         Vector3 sideToMoveDirection = (Quaternion.Euler(0, 90 * rotationFactor, 0) * sideMovedDirection).normalized;
 
+        //position the vertexToMove relative to the center point while maintaining the shape
         vertexToMove.transform.position = _centerPoint.transform.position + sideToMoveDirection * demiSideToMoveDistance;
 
-        _heightPoint.transform.position = new Vector3(_widthPoint.transform.position.x, _heightPoint.transform.position.y, _widthPoint.transform.position.z);
+        //update the position of the _heightPoint vertex by setting it to a new position
+        _heightPoint.transform.position = new Vector3(_widthPoint.transform.position.x, 
+                                                        _heightPoint.transform.position.y, 
+                                                            _widthPoint.transform.position.z);
     }
-
-
 
     public void MoveVertex(GameObject vertexToMove, Vector3 position)
     {
+        //take the box and move it in the plane
         if (vertexToMove == _centerPoint)
         {
             this.transform.position = position;
             _heightVertexIsMoving = false;
         }
 
+        //change the height
         else if (vertexToMove == _heightPoint)
             MoveVerticalVertex();
 
         else
         {
             vertexToMove.transform.position = position;
+            //change width
             if (vertexToMove == _widthPoint)
                 ReplaceVertexAfterOtherMoved(_widthPoint, _lengthPoint);
-
+            //change lenght 
             else ReplaceVertexAfterOtherMoved(_lengthPoint, _widthPoint);
 
             _heightVertexIsMoving = false;
@@ -332,20 +353,21 @@ public class Box : MonoBehaviour
             return;
         }
 
-
         Vector3 currentPosition = _heightPoint.transform.position;
+
+        //calculate the distance between the camera's position and the current vertex position 
         float distancePointCamera = Vector3.Distance(Camera.main.transform.position, currentPosition);
 
         Vector3 currentViewportPosition = Camera.main.WorldToViewportPoint(currentPosition);
 
+        //calculate the new world position for the vertex based on the movement of the camera along the y-axis
         Vector3 newWorldPositionFromViewport = Camera.main.ViewportToWorldPoint(new Vector3(currentViewportPosition.x,
                                                                                             _initialHeightVertexViewportPosition.y, 
                                                                                             distancePointCamera));
-
+        //Update the position of the _heightPoint vertex using the new world position calculated
         _heightPoint.transform.position = new Vector3(_initialHeightVertexWorldPosition.x,
                                                       newWorldPositionFromViewport.y, 
                                                       _initialHeightVertexWorldPosition.z);
-
     }
 
 

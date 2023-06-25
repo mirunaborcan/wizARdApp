@@ -26080,12 +26080,14 @@ struct Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1  : public MonoBehaviour_t53
 	bool ____heightVertexIsMoving_13;
 	// UnityEngine.GameObject Box::_volumeText
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ____volumeText_14;
+	// TMPro.TMP_Text Box::_bottomVolumeText
+	TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* ____bottomVolumeText_15;
 	// UnityEngine.Vector3 Box::_initialHeightVertexWorldPosition
-	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexWorldPosition_15;
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexWorldPosition_16;
 	// UnityEngine.Vector3 Box::_initialHeightVertexViewportPosition
-	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexViewportPosition_16;
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexViewportPosition_17;
 	// UIManager Box::_uiManager
-	UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* ____uiManager_17;
+	UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* ____uiManager_18;
 };
 
 // TMPro.Examples.CameraController
@@ -43331,9 +43333,9 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable2917[1] =
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable2918[1] = 
 {
 	static_cast<int32_t>(offsetof(ProfileData_t3F9F5D5C3A4A18F91FA017A879E380490F04941D, ___userName_0)),};
-IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable2919[14] = 
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable2919[15] = 
 {
-	static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____widthPoint_4)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____lengthPoint_5)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____centerPoint_6)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____heightPoint_7)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____invisibleVerticesList_8)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____downBoxLineRenderer_9)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____upBoxLineRenderer_10)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____edgesLineRenderers_11)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____textsAreCreated_12)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____heightVertexIsMoving_13)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____volumeText_14)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____initialHeightVertexWorldPosition_15)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____initialHeightVertexViewportPosition_16)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____uiManager_17)),};
+	static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____widthPoint_4)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____lengthPoint_5)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____centerPoint_6)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____heightPoint_7)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____invisibleVerticesList_8)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____downBoxLineRenderer_9)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____upBoxLineRenderer_10)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____edgesLineRenderers_11)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____textsAreCreated_12)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____heightVertexIsMoving_13)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____volumeText_14)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____bottomVolumeText_15)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____initialHeightVertexWorldPosition_16)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____initialHeightVertexViewportPosition_17)),static_cast<int32_t>(offsetof(Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1, ____uiManager_18)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable2920[11] = 
 {
 	static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____centerPoint_4)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____radiusPoint_5)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____uiManager_6)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____radiusText_7)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____surfaceText_8)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____edgesLineRenderer_9)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____radiusLineRenderer_10)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____radius_11)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____numberOfPoints_12)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____vertexYPosition_13)),static_cast<int32_t>(offsetof(Circle_t94A39776481461358A492459B485D07163250442, ____textsAreCreated_14)),};

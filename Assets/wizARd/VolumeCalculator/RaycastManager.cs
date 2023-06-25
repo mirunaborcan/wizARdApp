@@ -27,13 +27,16 @@ public class RaycastManager : MonoBehaviour
 
     void Update()
     {
+        // a ray starts from the center of the screen and extending into the scene
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
-        if(Physics.Raycast(ray, out _hit))
+        // performs a raycast using the ray
+        if (Physics.Raycast(ray, out _hit))
         {
-            //If Raycast hit ARPlane
+            //if Raycast hit ARPlane
             if (_hit.transform.CompareTag("ARPlane"))
             {
+                //if user want to change L/H/W he press the button for moving the resp vertex
                 if (_moveVertexButtonPressed)
                 {
                     _shapesManager.MoveVertex(_vertexHoverObj, _hit.point);
@@ -41,7 +44,7 @@ public class RaycastManager : MonoBehaviour
                 }
                 else
                 {
-                    //If the user was previously raycasting a vertex
+                    //if the user was previously raycasting a vertex
                     if (_isVertexHover)
                     {
                         _isVertexHover = false;
@@ -53,11 +56,10 @@ public class RaycastManager : MonoBehaviour
                 }
             }
 
-
-            //If Raycast hit a vertex
+            //if Raycast hit a vertex
             else if (_hit.transform.CompareTag("Vertices"))
             {
-                //If user is already moving another vertex
+                //if user is already moving another vertex
                 if (_moveVertexButtonPressed)
                     return;
 
@@ -81,7 +83,7 @@ public class RaycastManager : MonoBehaviour
             }
         }
 
-        //If Raycast did not hit any object
+        //if Raycast did not hit any object
         else
             _uiManager.RaycastHitNothing();
 

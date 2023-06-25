@@ -849,6 +849,7 @@ IL2CPP_EXTERN_C String_t* _stringLiteral15196F05B117690F3E12E56AA0C43803EA0D2A46
 IL2CPP_EXTERN_C String_t* _stringLiteral16DD21BE77B115D392226EB71A2D3A9FDC29E3F0;
 IL2CPP_EXTERN_C String_t* _stringLiteral1912D6E6AF622BE14A56B4912769A85B92C31299;
 IL2CPP_EXTERN_C String_t* _stringLiteral1A5C9965F2C004449BB39E558EE8DBAD66D98C45;
+IL2CPP_EXTERN_C String_t* _stringLiteral1AF16B09F34EED9CD199C003A3823655E046DB16;
 IL2CPP_EXTERN_C String_t* _stringLiteral1B1630F9122A1BBA0583785006DC7FB273C15AC3;
 IL2CPP_EXTERN_C String_t* _stringLiteral1BC11AF3E81EF44A1261F6CD7B5B5258E49CE614;
 IL2CPP_EXTERN_C String_t* _stringLiteral1BE50916EB217F9B9E38754BB90A2846D7C33AFD;
@@ -927,6 +928,7 @@ IL2CPP_EXTERN_C String_t* _stringLiteralDD31ADCB8CE560AAA1C57118C1766EA143F5F19F
 IL2CPP_EXTERN_C String_t* _stringLiteralDECFB8F380101725B06EAE2D3F983211A277171C;
 IL2CPP_EXTERN_C String_t* _stringLiteralDF3F61809253963C155B3D8E02F5B6DAA5201287;
 IL2CPP_EXTERN_C String_t* _stringLiteralE3CCD98A281D9B79EB2A7CF8B887089C56608B0E;
+IL2CPP_EXTERN_C String_t* _stringLiteralE4951BCD1828CFB0F9F9F51A9E38DF95AB4414C7;
 IL2CPP_EXTERN_C String_t* _stringLiteralEF516EC7240CA160FD729299C926B5EDB246658A;
 IL2CPP_EXTERN_C String_t* _stringLiteralF359E6DDFFFF3D8B034D057E57DBD8ABA4ED7FFC;
 IL2CPP_EXTERN_C String_t* _stringLiteralF4EFD0A091EDA133BB7A5D3724BAE3C519DCBD01;
@@ -4491,12 +4493,14 @@ struct Box_tD8A361A45880D5D7558BA7F17AB5C745BF7543B1  : public MonoBehaviour_t53
 	bool ____heightVertexIsMoving_13;
 	// UnityEngine.GameObject Box::_volumeText
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ____volumeText_14;
+	// TMPro.TMP_Text Box::_bottomVolumeText
+	TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* ____bottomVolumeText_15;
 	// UnityEngine.Vector3 Box::_initialHeightVertexWorldPosition
-	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexWorldPosition_15;
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexWorldPosition_16;
 	// UnityEngine.Vector3 Box::_initialHeightVertexViewportPosition
-	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexViewportPosition_16;
+	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ____initialHeightVertexViewportPosition_17;
 	// UIManager Box::_uiManager
-	UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* ____uiManager_17;
+	UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* ____uiManager_18;
 };
 
 // TMPro.Examples.CameraController
@@ -8497,8 +8501,6 @@ inline Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* GameObject_GetComponentIn
 {
 	return ((  Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* (*) (GameObject_t76FEDD663AB33C991A9C9A23129337651094216F*, const RuntimeMethod*))GameObject_GetComponentInChildren_TisRuntimeObject_mED181B37054A10395CA356010754C7DFC685893C_gshared)(__this, method);
 }
-// System.String System.Single::ToString()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Single_ToString_mE282EDA9CA4F7DF88432D807732837A629D04972 (float* __this, const RuntimeMethod* method) ;
 // UnityEngine.Vector3 UnityEngine.Camera::WorldToScreenPoint(UnityEngine.Vector3)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Camera_WorldToScreenPoint_m26B4C8945C3B5731F1CC5944CFD96BF17126BAA3 (Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_position, const RuntimeMethod* method) ;
 // System.Void Box::DrawEdges()
@@ -8644,6 +8646,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MeshFilter_set_mesh_mD2988E2D835205FD6B6
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Circle_UpdateRadiusText_mBF690CEBFA3E87BD7CDC7F22233F7DC041F839F9 (Circle_t94A39776481461358A492459B485D07163250442* __this, const RuntimeMethod* method) ;
 // System.Void Circle::UpdateSurfaceText()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Circle_UpdateSurfaceText_m331EC0743B20152E15EB42DED9D48FFC90D772AE (Circle_t94A39776481461358A492459B485D07163250442* __this, const RuntimeMethod* method) ;
+// System.String System.Single::ToString()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Single_ToString_mE282EDA9CA4F7DF88432D807732837A629D04972 (float* __this, const RuntimeMethod* method) ;
 // UnityEngine.Vector3 UnityEngine.Vector3::op_Division(UnityEngine.Vector3,System.Single)
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Division_mCC6BB24E372AB96B8380D1678446EF6A8BAE13BB_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, float ___1_d, const RuntimeMethod* method) ;
 // UnityEngine.Vector3 UnityEngine.Transform::get_right()
@@ -13590,8 +13594,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_Init_mE094F5E8E026C50921F1BCF1BAFFA0
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_6;
 		L_6 = Object_FindObjectOfType_TisUIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3_mCA249E897715EB5612CD3F81BF0CB156CB2B3DBC(Object_FindObjectOfType_TisUIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3_mCA249E897715EB5612CD3F81BF0CB156CB2B3DBC_RuntimeMethod_var);
-		__this->____uiManager_17 = L_6;
-		Il2CppCodeGenWriteBarrier((void**)(&__this->____uiManager_17), (void*)L_6);
+		__this->____uiManager_18 = L_6;
+		Il2CppCodeGenWriteBarrier((void**)(&__this->____uiManager_18), (void*)L_6);
 		// CreateTexts();
 		Box_CreateTexts_mCB2B03961EC34653E0931A895E3F2B45A478B484(__this, NULL);
 		// CreateLineRenderers();
@@ -13691,7 +13695,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_InitVertices_m90E10E8E42A42E63AE25C9
 		Transform_SetParent_m6677538B60246D958DD91F931C50F969CCBB5250(L_20, L_21, NULL);
 		// PlaceLengthVertex();
 		Box_PlaceLengthVertex_m36B0F41773DBECDD4B42A1D0CC661D837B358C9F(__this, NULL);
-		// _heightPoint.transform.position = _widthPoint.transform.position + new Vector3(0, Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position), 0);
+		// _heightPoint.transform.position = _widthPoint.transform.position +
+		//     new Vector3(0, Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position), 0);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_22 = __this->____heightPoint_7;
 		NullCheck(L_22);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_23;
@@ -14024,7 +14029,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_CreateTexts_mCB2B03961EC34653E0931A8
 	}
 	{
 		// if (!_uiManager)
-		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_0 = __this->____uiManager_17;
+		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_0 = __this->____uiManager_18;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
 		L_1 = Object_op_Implicit_m93896EF7D68FA113C42D3FE2BC6F661FC7EF514A(L_0, NULL);
@@ -14041,10 +14046,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_CreateTexts_mCB2B03961EC34653E0931A8
 IL_000e:
 	{
 		// _volumeText = Instantiate(_uiManager.textSpecialeInfosPrefab, _uiManager.transform);
-		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_2 = __this->____uiManager_17;
+		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_2 = __this->____uiManager_18;
 		NullCheck(L_2);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_3 = L_2->___textSpecialeInfosPrefab_18;
-		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_4 = __this->____uiManager_17;
+		UIManager_t16825A2483574F37D7D47AB939A6FA639678B1F3* L_4 = __this->____uiManager_18;
 		NullCheck(L_4);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_5;
 		L_5 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_4, NULL);
@@ -14065,14 +14070,23 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_UpdateTexts_mBB7FCF240A8C90D5A301E36
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&GameObject_GetComponentInChildren_TisText_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62_m4883A479F4252D21D45D5AD3140CB42598C48A13_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral1AF16B09F34EED9CD199C003A3823655E046DB16);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral32E9B9ABEE6B8C51336BC9623E2754D6312A29B0);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE4951BCD1828CFB0F9F9F51A9E38DF95AB4414C7);
 		s_Il2CppMethodInitialized = true;
 	}
 	float V_0 = 0.0f;
 	float V_1 = 0.0f;
 	float V_2 = 0.0f;
 	float V_3 = 0.0f;
+	TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* G_B2_0 = NULL;
+	String_t* G_B2_1 = NULL;
+	TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* G_B1_0 = NULL;
+	String_t* G_B1_1 = NULL;
+	String_t* G_B3_0 = NULL;
+	String_t* G_B3_1 = NULL;
 	{
 		// width = Vector3.Distance(_centerPoint.transform.position, _lengthPoint.transform.position) * 2.0f;
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->____centerPoint_6;
@@ -14128,7 +14142,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_UpdateTexts_mBB7FCF240A8C90D5A301E36
 		L_20 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_19, NULL);
 		float L_21 = L_20.___y_3;
 		V_2 = ((float)il2cpp_codegen_subtract(L_17, L_21));
-		// _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString() + " m3";
+		// _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString("#.###") + " m3";
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_22 = __this->____volumeText_14;
 		NullCheck(L_22);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_23;
@@ -14138,7 +14152,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_UpdateTexts_mBB7FCF240A8C90D5A301E36
 		float L_26 = V_1;
 		V_3 = ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(L_24, L_25)), L_26));
 		String_t* L_27;
-		L_27 = Single_ToString_mE282EDA9CA4F7DF88432D807732837A629D04972((&V_3), NULL);
+		L_27 = Single_ToString_m3F2C4433B6ADFA5ED8E3F14ED19CD23014E5179D((&V_3), _stringLiteralE4951BCD1828CFB0F9F9F51A9E38DF95AB4414C7, NULL);
 		String_t* L_28;
 		L_28 = String_Concat_m9E3155FB84015C823606188F53B47CB44C444991(L_27, _stringLiteral32E9B9ABEE6B8C51336BC9623E2754D6312A29B0, NULL);
 		NullCheck(L_23);
@@ -14187,6 +14201,51 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_UpdateTexts_mBB7FCF240A8C90D5A301E36
 		L_47 = Vector3_op_Addition_m78C0EC70CB66E8DCAC225743D82B268DAEE92067_inline(L_45, L_46, NULL);
 		NullCheck(L_30);
 		Transform_set_position_mA1A817124BB41B685043DED2A9BA48CDF37C4156(L_30, L_47, NULL);
+		// _bottomVolumeText.text = (width * height * length).ToString("#.###") + " m3";
+		TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* L_48 = __this->____bottomVolumeText_15;
+		float L_49 = V_0;
+		float L_50 = V_2;
+		float L_51 = V_1;
+		V_3 = ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(L_49, L_50)), L_51));
+		String_t* L_52;
+		L_52 = Single_ToString_m3F2C4433B6ADFA5ED8E3F14ED19CD23014E5179D((&V_3), _stringLiteralE4951BCD1828CFB0F9F9F51A9E38DF95AB4414C7, NULL);
+		String_t* L_53;
+		L_53 = String_Concat_m9E3155FB84015C823606188F53B47CB44C444991(L_52, _stringLiteral32E9B9ABEE6B8C51336BC9623E2754D6312A29B0, NULL);
+		NullCheck(L_48);
+		VirtualActionInvoker1< String_t* >::Invoke(66 /* System.Void TMPro.TMP_Text::set_text(System.String) */, L_48, L_53);
+		// Debug.Log($"Distance is:" + _bottomVolumeText);
+		TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* L_54 = __this->____bottomVolumeText_15;
+		TMP_Text_tE8D677872D43AD4B2AAF0D6101692A17D0B251A9* L_55 = L_54;
+		G_B1_0 = L_55;
+		G_B1_1 = _stringLiteral1AF16B09F34EED9CD199C003A3823655E046DB16;
+		if (L_55)
+		{
+			G_B2_0 = L_55;
+			G_B2_1 = _stringLiteral1AF16B09F34EED9CD199C003A3823655E046DB16;
+			goto IL_0160;
+		}
+	}
+	{
+		G_B3_0 = ((String_t*)(NULL));
+		G_B3_1 = G_B1_1;
+		goto IL_0165;
+	}
+
+IL_0160:
+	{
+		NullCheck(G_B2_0);
+		String_t* L_56;
+		L_56 = VirtualFuncInvoker0< String_t* >::Invoke(3 /* System.String System.Object::ToString() */, G_B2_0);
+		G_B3_0 = L_56;
+		G_B3_1 = G_B2_1;
+	}
+
+IL_0165:
+	{
+		String_t* L_57;
+		L_57 = String_Concat_m9E3155FB84015C823606188F53B47CB44C444991(G_B3_1, G_B3_0, NULL);
+		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
+		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_57, NULL);
 		// }
 		return;
 	}
@@ -15454,7 +15513,9 @@ IL_0033:
 		L_31 = Vector3_op_Addition_m78C0EC70CB66E8DCAC225743D82B268DAEE92067_inline(L_27, L_30, NULL);
 		NullCheck(L_24);
 		Transform_set_position_mA1A817124BB41B685043DED2A9BA48CDF37C4156(L_24, L_31, NULL);
-		// _heightPoint.transform.position = new Vector3(_widthPoint.transform.position.x, _heightPoint.transform.position.y, _widthPoint.transform.position.z);
+		// _heightPoint.transform.position = new Vector3(_widthPoint.transform.position.x,
+		//                                                 _heightPoint.transform.position.y,
+		//                                                     _widthPoint.transform.position.z);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_32 = __this->____heightPoint_7;
 		NullCheck(L_32);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_33;
@@ -15622,15 +15683,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Box_MoveVerticalVertex_mE28EFB5590E7DACB
 		NullCheck(L_2);
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_3;
 		L_3 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_2, NULL);
-		__this->____initialHeightVertexWorldPosition_15 = L_3;
+		__this->____initialHeightVertexWorldPosition_16 = L_3;
 		// _initialHeightVertexViewportPosition = Camera.main.WorldToViewportPoint(_initialHeightVertexWorldPosition);
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_4;
 		L_4 = Camera_get_main_m52C992F18E05355ABB9EEB64A4BF2215E12762DF(NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_5 = __this->____initialHeightVertexWorldPosition_15;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_5 = __this->____initialHeightVertexWorldPosition_16;
 		NullCheck(L_4);
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_6;
 		L_6 = Camera_WorldToViewportPoint_m285523443225EDA79BBEF9C9EDD76B99CFED054B(L_4, L_5, NULL);
-		__this->____initialHeightVertexViewportPosition_16 = L_6;
+		__this->____initialHeightVertexViewportPosition_17 = L_6;
 		// _heightVertexIsMoving = true;
 		__this->____heightVertexIsMoving_13 = (bool)1;
 		// return;
@@ -15676,7 +15737,7 @@ IL_003c:
 		L_18 = Camera_get_main_m52C992F18E05355ABB9EEB64A4BF2215E12762DF(NULL);
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_19 = V_2;
 		float L_20 = L_19.___x_2;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_21 = (&__this->____initialHeightVertexViewportPosition_16);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_21 = (&__this->____initialHeightVertexViewportPosition_17);
 		float L_22 = L_21->___y_3;
 		float L_23 = V_1;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_24;
@@ -15693,11 +15754,11 @@ IL_003c:
 		NullCheck(L_26);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_27;
 		L_27 = GameObject_get_transform_m0BC10ADFA1632166AE5544BDF9038A2650C2AE56(L_26, NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_28 = (&__this->____initialHeightVertexWorldPosition_15);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_28 = (&__this->____initialHeightVertexWorldPosition_16);
 		float L_29 = L_28->___x_2;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_30 = V_3;
 		float L_31 = L_30.___y_3;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_32 = (&__this->____initialHeightVertexWorldPosition_15);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_32 = (&__this->____initialHeightVertexWorldPosition_16);
 		float L_33 = L_32->___z_4;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_34;
 		memset((&L_34), 0, sizeof(L_34));
@@ -21334,7 +21395,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RaycastManager_Update_mBE52875E47DD7BF94
 		NullCheck(L_0);
 		Ray_t2B1742D7958DC05BDC3EFC7461D3593E1430DC00 L_2;
 		L_2 = Camera_ViewportPointToRay_m54F3994B010EFAC642F3C0E367370483B9DBF0F4(L_0, L_1, NULL);
-		// if(Physics.Raycast(ray, out _hit))
+		// if (Physics.Raycast(ray, out _hit))
 		RaycastHit_t6F30BD0B38B56401CA833A1B87BD74F2ACD2F2B5* L_3 = (&__this->____hit_8);
 		bool L_4;
 		L_4 = Physics_Raycast_mCAC9F02A1AAB49E16B384EBC8318E2DF30F4B0E5(L_2, L_3, NULL);
