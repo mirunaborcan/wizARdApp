@@ -27,12 +27,12 @@ public class Circle : MonoBehaviour
 
     private bool _textsAreCreated = false;
 
+    private static float _lastSurface;
     private void Update()
     {
         if (_textsAreCreated)
             UpdateTexts();
     }
-
 
     public void Init()
     {
@@ -49,7 +49,6 @@ public class Circle : MonoBehaviour
         UpdateRadius();
     }
 
-
     public void CreateTexts()
     {
         if (!_uiManager)
@@ -61,12 +60,10 @@ public class Circle : MonoBehaviour
         _textsAreCreated = true;
     }
 
-
     private void UpdateRadius()
     {
         _radius = Vector3.Distance(_centerPoint.transform.position, _radiusPoint.transform.position);
     }
-
 
     public void Draw()
     {
@@ -77,7 +74,6 @@ public class Circle : MonoBehaviour
         PlaceVerticesOverMesh();
         UpdateTexts();
     }
-
 
     private void InitRadiusObject()
     {
@@ -102,7 +98,6 @@ public class Circle : MonoBehaviour
         _radiusLineRenderer.SetPosition(1, _radiusPoint.transform.position);
     }
 
-
     private void DrawEdges()
     {
         _edgesLineRenderer.positionCount = _numberOfPoints + 1; //Add one extra point for the radius line
@@ -118,8 +113,6 @@ public class Circle : MonoBehaviour
 
         _edgesLineRenderer.SetPositions(pointsPosition.ToArray());
     }
-
-
     private void DrawMesh()
     {
         MeshFilter mf = GetComponent<MeshFilter>();
@@ -154,13 +147,11 @@ public class Circle : MonoBehaviour
         mesh.triangles = triangles;
     }
 
-
     private void UpdateTexts()
     {
         UpdateRadiusText();
         UpdateSurfaceText();
     }
-
 
     private void UpdateRadiusText()
     {
@@ -171,22 +162,23 @@ public class Circle : MonoBehaviour
                                                                    Camera.main.WorldToScreenPoint(_radiusPoint.transform.position) - Camera.main.WorldToScreenPoint(_centerPoint.transform.position));
         _radiusText.transform.rotation = rotationToBeAligned * _radiusText.transform.rotation;
     }
-
-
+    public float getLastSurface()
+    {
+        UpdateTexts();
+        return _lastSurface;
+    }
     private void UpdateSurfaceText()
     {
+        _lastSurface = (Mathf.PI * Mathf.Pow(_radius, 2));
         _surfaceText.GetComponentInChildren<Text>().text = (Mathf.PI * Mathf.Pow(_radius,2)).ToString() + "m²";
         _surfaceText.transform.position = Camera.main.WorldToScreenPoint(_centerPoint.transform.position) + new Vector3(-50f, 50f, 0);
     }
-
-
 
     private void PlaceVerticesOverMesh()
     {
         _centerPoint.transform.position = new Vector3(_centerPoint.transform.position.x, _vertexYPosition + 0.01f, _centerPoint.transform.position.z);
         _radiusPoint.transform.position = new Vector3(_radiusPoint.transform.position.x, _vertexYPosition + 0.01f, _radiusPoint.transform.position.z);
     }
-
 
     public void MoveVertex(GameObject vertexToMove, Vector3 position)
     {
@@ -199,8 +191,6 @@ public class Circle : MonoBehaviour
         Draw();
     }
 
-
-
     public void Delete()
     {
         foreach(Transform child in transform)
@@ -210,5 +200,6 @@ public class Circle : MonoBehaviour
         Destroy(_radiusText);
         Destroy(_surfaceText);
         Destroy(this.gameObject);
+        _lastSurface = 0;
     }
 }

@@ -103,7 +103,6 @@ public class RaycastManager : MonoBehaviour
             _shapesManager.StartMovingVertex(_vertexHoverObj);
     }
 
-
     public void MoveVertexButtonReleased()
     {
         _moveVertexButtonPressed = false;
@@ -112,7 +111,6 @@ public class RaycastManager : MonoBehaviour
         if (_vertexHoverObj)
             _shapesManager.StopMovingVertex(_vertexHoverObj);
     }
-
 
     public void DeleteButtonClicked()
     {

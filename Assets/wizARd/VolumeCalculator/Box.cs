@@ -22,11 +22,13 @@ public class Box : MonoBehaviour
     private bool _heightVertexIsMoving;
 
     private GameObject _volumeText;
-    public TMP_Text _bottomVolumeText;
 
     private Vector3 _initialHeightVertexWorldPosition;
     private Vector3 _initialHeightVertexViewportPosition;
     private UIManager _uiManager;
+
+    private static float _lastVolume;
+    public TMP_Text _bottomVolumeText;
 
     // Update is called once per frame
     void Update()
@@ -147,8 +149,6 @@ public class Box : MonoBehaviour
         _textsAreCreated = true;
     }
 
-
-
     private void UpdateTexts()
     {
         float width, length, height;
@@ -156,15 +156,19 @@ public class Box : MonoBehaviour
         width = Vector3.Distance(_centerPoint.transform.position, _lengthPoint.transform.position) * 2.0f;
         length = Vector3.Distance(_centerPoint.transform.position, _widthPoint.transform.position) * 2.0f;
         height = _heightPoint.transform.position.y - _centerPoint.transform.position.y;
-       
-        _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString("#.###") + " m3";
+        _lastVolume = (width * height * length);
+
+        _volumeText.GetComponentInChildren<Text>().text = (width * height * length).ToString("#.######") + " m3";
         _volumeText.transform.position = Camera.main.WorldToScreenPoint(new Vector3(_centerPoint.transform.position.x, _heightPoint.transform.position.y, _centerPoint.transform.position.z)) + new Vector3(0,-100f,0);
         
-        _bottomVolumeText.text = (width * height * length).ToString("#.###") + " m3";
-        Debug.Log($"Distance is:" + _bottomVolumeText);
     }
 
-
+    public float getLastVolume()
+    {
+        UpdateTexts();
+        Debug.Log($"Distance is:" + _lastVolume);
+        return _lastVolume;
+    }
     private void Draw()
     {
         UpdateInvisibleVerticesPosition();
@@ -381,6 +385,7 @@ public class Box : MonoBehaviour
         Destroy(_downBoxLineRenderer.gameObject);
         Destroy(_upBoxLineRenderer.gameObject);
         Destroy(_volumeText);
+        _lastVolume = 0;
 
         foreach (LineRenderer line in _edgesLineRenderers)
             Destroy(line.gameObject);

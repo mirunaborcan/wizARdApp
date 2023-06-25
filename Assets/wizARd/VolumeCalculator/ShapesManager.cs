@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 //Enum used to define which type of shape user want to draw
 public enum WANTED_SHAPE
@@ -37,7 +37,7 @@ public class ShapesManager : MonoBehaviour
     private Line _currentLine;
     private Polygon _currentPolygon;
 
-
+    public TMP_Text surface_volume;
 
     //Called to instantiate a vertex, and create a shape if the number of vertices created correspond to the selected shape
     public void PlaceVertex(Vector3 hitPosition)
@@ -94,8 +94,6 @@ public class ShapesManager : MonoBehaviour
             default:
                 break;
         }
-
-       
     }
 
     //Return true if the user can end the current line or polygon (i.e the user created a sufficent number of vertex)
@@ -117,8 +115,6 @@ public class ShapesManager : MonoBehaviour
 
     }
 
-
-
     private void CreateLine()
     {
         GameObject line = Instantiate(_linePrefab, _shapesContainer.transform);
@@ -127,10 +123,10 @@ public class ShapesManager : MonoBehaviour
         _currentLine = lineScript;
     }
 
-
-
     private void CreateCircle()
     {
+        float surface; 
+
         GameObject circle = Instantiate(_circlePrefab, _shapesContainer.transform);
         circle.transform.position = Vector3.zero; //  _verticesCreated[0].transform.position;
         Circle circleScript = circle.GetComponent<Circle>();
@@ -140,9 +136,10 @@ public class ShapesManager : MonoBehaviour
         circleScript.Init();
         circleScript.Draw();
         _verticesCreated.Clear();
+
+        surface = circleScript.getLastSurface();
+        surface_volume.text = surface.ToString("#.######") + " m2";
     }
-
-
 
     private void CreateTriangle()
     {
@@ -153,8 +150,6 @@ public class ShapesManager : MonoBehaviour
         triangleScript.Init(_verticesCreated);
         _verticesCreated.Clear();
     }
-
-
     private void CreateSquare()
     {
         GameObject square = Instantiate(_squarePrefab, _shapesContainer.transform);
@@ -165,8 +160,6 @@ public class ShapesManager : MonoBehaviour
         _verticesCreated.Clear();
     }
 
-
-
     private void CreatePolygon()
     {
         GameObject polygon = Instantiate(_polygonPrefab, _shapesContainer.transform);
@@ -175,18 +168,19 @@ public class ShapesManager : MonoBehaviour
         _currentPolygon = polygonScript;
     }
 
-
-
     private void CreateBox()
     {
+        float volume;
+
         GameObject box = Instantiate(_boxPrefab, _shapesContainer.transform);
         box.transform.position = Vector3.zero;
         Box boxScript = box.GetComponent<Box>();
 
         boxScript.Init(_verticesCreated[0], _verticesCreated[1]);
         _verticesCreated.Clear();
+        volume = boxScript.getLastVolume();
+        surface_volume.text = volume.ToString("#.######") + " m3";
     }
-
 
     public void ChangeWantedShape(WANTED_SHAPE wantedShape)
     {
@@ -196,8 +190,8 @@ public class ShapesManager : MonoBehaviour
             Destroy(vertex);
 
         _verticesCreated.Clear();
+        surface_volume.text = "";
     }
-
 
     public void VertexHover(GameObject vertex, bool hover)
     {
@@ -213,6 +207,9 @@ public class ShapesManager : MonoBehaviour
     //Find the correct shape type of which vertex is a part of, to call the correct class 
     public void MoveVertex(GameObject vertex, Vector3 position)
     {
+        float surface;
+        float volume;
+
         switch(vertex.GetComponent<VertexType>().ShapeType)
         {
             case VERTEX_SHAPE_TYPE.LINE:
@@ -221,6 +218,8 @@ public class ShapesManager : MonoBehaviour
 
             case VERTEX_SHAPE_TYPE.CIRCLE:
                 vertex.GetComponentInParent<Circle>().MoveVertex(vertex, position);
+                surface =  vertex.GetComponentInParent<Circle>().getLastSurface();
+                surface_volume.text = surface.ToString("#.######") + " m2";
                 break;
 
             case VERTEX_SHAPE_TYPE.TRIANGLE:
@@ -237,6 +236,8 @@ public class ShapesManager : MonoBehaviour
 
             case VERTEX_SHAPE_TYPE.BOX:
                 vertex.GetComponentInParent<Box>().MoveVertex(vertex, position);
+                volume = vertex.GetComponentInParent<Box>().getLastVolume();
+                surface_volume.text = volume.ToString("#.######") + " m3";
                 break;
 
             case VERTEX_SHAPE_TYPE.NOT_AFFECTED_YET:
@@ -262,8 +263,6 @@ public class ShapesManager : MonoBehaviour
         vertex.GetComponent<Renderer>().material = _classicVertexMaterial;
         vertex.GetComponent<MeshCollider>().enabled = true;
     }
-
-
     public void DeleteVertex(GameObject vertex)
     {
         switch (vertex.GetComponent<VertexType>().ShapeType)
@@ -274,6 +273,7 @@ public class ShapesManager : MonoBehaviour
 
             case VERTEX_SHAPE_TYPE.CIRCLE:
                 vertex.GetComponentInParent<Circle>().Delete();
+                surface_volume.text = "";
                 break;
 
             case VERTEX_SHAPE_TYPE.TRIANGLE:
@@ -290,6 +290,7 @@ public class ShapesManager : MonoBehaviour
 
             case VERTEX_SHAPE_TYPE.BOX:
                 vertex.GetComponentInParent<Box>().Delete();
+                surface_volume.text = "";
                 break;
 
             case VERTEX_SHAPE_TYPE.NOT_AFFECTED_YET:

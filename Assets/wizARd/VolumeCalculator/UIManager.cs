@@ -39,20 +39,17 @@ public class UIManager : MonoBehaviour
         CircleButtonClicked();
     }
 
-
     public void LineButtonClicked()
     {
         _selectedCircle.transform.position = _lineButton.transform.position;
         _shapesManager.ChangeWantedShape(WANTED_SHAPE.LINE);
     }
 
-
     public void CircleButtonClicked()
     {
         _selectedCircle.transform.position = _circleButton.transform.position;
         _shapesManager.ChangeWantedShape(WANTED_SHAPE.CIRCLE);
     }
-
 
     public void TriangleButtonClicked()
     {
@@ -61,13 +58,11 @@ public class UIManager : MonoBehaviour
 
     }
 
-
     public void SquareButtonClicked()
     {
         _selectedCircle.transform.position = _squareButton.transform.position;
         _shapesManager.ChangeWantedShape(WANTED_SHAPE.SQUARE);
     }
-
 
     public void PentagoneButtonClicked()
     {
@@ -75,21 +70,16 @@ public class UIManager : MonoBehaviour
         _shapesManager.ChangeWantedShape(WANTED_SHAPE.POLYGON);
     }
 
-
     public void BoxButtonClicked()
     {
         _selectedCircle.transform.position = _boxButton.transform.position;
         _shapesManager.ChangeWantedShape(WANTED_SHAPE.BOX);
     }
 
-
     public void MenuButtonClicked()
     {
         _shapesPanel.SetActive(!_shapesPanel.activeSelf);
     }
-
-
-
 
     public void RaycastHitPlane(bool showMoveButton)
     {
